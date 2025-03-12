@@ -1,0 +1,46 @@
+openapi: 3.0.1
+info:
+  title: Live Demo OpenAPI
+  version: 1.0.0
+servers:
+- url: https://live-demo-openapi.wiremockapi.cloud
+- url: https://ogrzq.wiremockapi.cloud
+paths:
+  /people/{id}:
+    description: People by ID
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      description: Get a person
+      parameters:
+      - name: fields
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - full
+          - summary
+      responses:
+        "200":
+          description: People search returned successfully
+          content:
+            application/json:
+              examples:
+                one:
+                  summary: First example
+                  x-parameter-values:
+                    id: abc123
+                    fields: summary
+                  value: |
+                    { "name": "John" }
+                two:
+                  summary: Second example
+                  x-parameter-values:
+                    id: cba321
+                    fields: full
+                  value: "{ \"name\": \"Jeff\", id: \"cba123\" }"
